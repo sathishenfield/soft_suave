@@ -13,7 +13,7 @@ public class MainPageView extends Composite {
     private static final MainPageUiBinder uiBinder = GWT.create(MainPageUiBinder.class);
 
     @UiField
-    TextBox inputBox;
+    TextBox inputBoxt;
 
     @UiField
     Button submitButton;
