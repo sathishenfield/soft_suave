@@ -1,0 +1,28 @@
+.main{
+    width: 100%;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center input{
+    height: 36px;
+    width: 80%;
+}
+.center button{
+    width: 80%;
+}
+
+::ng-deep .mdc-dialog .mdc-dialog__content{
+    padding-top: 0px !important;
+}
+::ng-deep .cdk-global-overlay-wrapper{
+    width: 100%;
+}
+
+::ng-deep .cdk-overlay-pane{
+    width: 40% !important;
+}

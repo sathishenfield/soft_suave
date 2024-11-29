@@ -1,0 +1,43 @@
+<div class="spinner-container" *ngIf="isLoading">
+    <div class="spinner-center">
+        <div>
+            <mat-spinner style="width: 26px;"></mat-spinner>
+        </div>
+        <div class="main">
+            <p style="font-size: 16px;">Loading...</p>
+        </div>
+    </div>
+</div>
+<div class="main" style="width: 100%;">
+    <div class="center">
+        <div class="heading">
+            <h2>Sign In</h2>
+        </div>
+        <div class="form-main">
+            <form [formGroup]="emailForm" (submit)="generateOtp()"  novalidate style="width: 80%;">
+                <div class="container-fluid mt-3">
+                    <div class="row">
+                        <div
+                            class="col-lg-12 col-md-12 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                            <mat-form-field class="example-full-width custom-height-field" style="width: 80%;" appearance="outline">
+                                <mat-label>Email</mat-label>
+                                <input type="email" matInput formControlName="email" placeholder="email@ex.com">
+                                <mat-error *ngIf="emailForm.get('email')?.hasError('required')">Email is
+                                    required</mat-error>
+                                <!-- <mat-error
+                                    *ngIf="detailForm.get('email')?.hasError('email') && !detailForm.get('email')?.hasError('required')">Invalid
+                                    email id</mat-error> -->
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="main">
+                    <button style="width: 80%;" mat-raised-button color="primary">Send OTP</button>
+                </div>
+            </form>
+        </div>
+        <div class="main" style="margin-top: 10px;">
+           <a style="color:  #1e64e0; cursor: pointer;" [routerLink]="['/login']">Login With Password</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="main">
+    <div class="center">
+        <div class="heading">
+            <h1>Sign In</h1>
+        </div>
+        <div class="form-main">
+            <form class="form" [formGroup]="signinForm" (ngSubmit)="signIn()">
+                <div class="form-sub">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Email</mat-label>
+                        <input type="text" matInput formControlName="userNameControl" placeholder="Email" >
+                        <mat-error *ngIf="signinForm.get('userNameControl')?.hasError('required')">Email is required</mat-error>
+                        <!-- <mat-error *ngIf="signinForm.get('userNameControl')?.hasError('invalidEmail')">Invalid Email id</mat-error>
+                        <mat-error *ngIf="signinForm.get('userNameControl')?.hasError('invalidPhoneNumber')">Phone Number must contain only 10 digits.</mat-error> -->
+                    </mat-form-field>
+                </div>
+                <div class="form-sub">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Password</mat-label>
+                        <input type="password" matInput [type]="hide ? 'password' : 'text'"  formControlName="passwordControl" placeholder="Password">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                          </button>
+                        <mat-error *ngIf="signinForm.get('passwordControl')?.hasError('required')">Password
+                            is required</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="captcha" *ngIf="false">
+                    <re-captcha (resolved)="onCaptchaResolved($event)" [siteKey]="siteKey" data-theme="dark"></re-captcha>
+                </div>
+                <div class="signin-button">
+                    <button type="submit">Sign In</button>
+                </div>
+            </form>
+        </div>
+        <div class="mb-3" *ngIf="false">
+            <a style="color:  #1e64e0; cursor: pointer;" [routerLink]="['/email-login']">Login With OTP</a>
+        </div>
+        <div class="mb-3" id="google-btn">
+        </div>
+        <div class="mb-2 pointer">
+            <p>Don't have an account<a (click)="navigateToRegister()"><span style="color: blue;"> Sign Up ?</span></a></p>
+        </div>
+    </div>
+</div>

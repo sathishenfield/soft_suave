@@ -1,0 +1,54 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.flex-end{
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    width: 90%;
+}
+
+.center{
+    width: 96%;
+}
+
+.matt-icon{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+::ng-deep .mdc-checkbox__background {
+    width: 40% !important;
+    height: 40% !important;
+    border: 1px solid rgba(0, 0, 0, 0.54) !important;
+    border-radius: 4px !important;
+}
+
+::ng-deep .mdc-checkbox .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background,
+.mdc-checkbox .mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background,
+.mdc-checkbox .mdc-checkbox__native-control[data-indeterminate=true]:enabled~.mdc-checkbox__background {
+    background-color: #3f51b5 !important;
+}
+::ng-deep .mdc-checkbox .mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background{
+    background-color: #3f51b5 !important;
+}
+
+.mdc-button--raised{
+    padding: 0px 26px 0px 26px;
+}
+
+::ng-deep .cdk-overlay-pane{
+    width: 20% !important;
+    justify-content: center;
+}
+
+::ng-deep .mat-mdc-menu-panel {
+    width: 80%;
+}

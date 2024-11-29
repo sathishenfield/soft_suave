@@ -1,0 +1,117 @@
+<div class="main">
+    <div class="center">
+        <h1>Sign Up</h1>
+    </div>
+    <div class="form-main">
+        <form [formGroup]="signinForm" (ngSubmit)="signin()" novalidate>
+            <div class="container-fluid mt-5">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>First Name</mat-label>
+                            <input type="text" matInput formControlName="firstNameControl" placeholder="First Name">
+                            <mat-error *ngIf="signinForm.get('firstNameControl')?.hasError('required')">First Name
+                                isrequired</mat-error>
+                            <mat-error
+                                *ngIf="signinForm.get('firstNameControl')?.hasError('alphabetic') && !signinForm.get('firstNameControl')?.hasError('required')">First
+                                Name must contain only alphabets</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Last Name</mat-label>
+                            <input type="text" matInput formControlName="lastNameControl" placeholder="Last Name">
+                            <mat-error *ngIf="signinForm.get('lastNameControl')?.hasError('required')">Last Name is
+                                required</mat-error>
+                            <mat-error
+                                *ngIf="signinForm.get('lastNameControl')?.hasError('alphabetic') && !signinForm.get('lastNameControl')?.hasError('required')">Last
+                                Name must contain only alphabets</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input type="email" matInput formControlName="emailControl" placeholder="email@ex.com">
+                            <mat-error *ngIf="signinForm.get('emailControl')?.hasError('required')">Email is
+                                required</mat-error>
+                            <mat-error
+                                *ngIf="signinForm.get('emailControl')?.hasError('email') && !signinForm.get('emailControl')?.hasError('required')">Invalid
+                                email id</mat-error>
+                            <mat-error
+                                *ngIf="signinForm.get('emailControl')?.hasError('emailTaken')">Email Id already exist</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Phone Number</mat-label>
+                            <input type="text" matInput formControlName="phoneNumberControl"
+                                (submit)="updatePhoneNumberErrorMessage()" (blur)="updatePhoneNumberErrorMessage()"
+                                placeholder="Phone Number">
+                            <mat-error *ngIf="phoneNumberErrorMessage">{{phoneNumberErrorMessage}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Address</mat-label>
+                            <textarea matInput formControlName="addressControl"></textarea>
+                          </mat-form-field>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Country</mat-label>
+                            <input type="text" matInput  formControlName="countryControl" placeholder="country">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>State</mat-label>
+                            <input type="text" matInput  formControlName="stateControl" placeholder="state">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>City</mat-label>
+                            <input type="text" matInput  formControlName="cityControl" placeholder="city">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>password</mat-label>
+                            <input type="password" matInput matTooltip="Password
+                            must contain minimum 8 digit, One uppercase letter, one digit and one special
+                            character" formControlName="passwordControl" placeholder="password">
+                            <mat-error *ngIf="signinForm.get('passwordControl')?.hasError('required')">Password is
+                                required</mat-error>
+                            <mat-error
+                                *ngIf="signinForm.get('passwordControl')?.hasError('pattern') && !signinForm.get('passwordControl')?.hasError('required')">Invalid
+                                Password</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Re-password</mat-label>
+                            <input type="password" matInput formControlName="rePasswordControl"
+                                placeholder="Re-password">
+                            <mat-error *ngIf="signinForm.get('rePasswordControl')?.hasError('required')">Re-password is
+                                required</mat-error>
+                            <mat-error
+                                *ngIf="signinForm.get('rePasswordControl')?.hasError('passwordMismatch')">Password does
+                                not match</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="center">
+                <button type="submit">Sign Up</button>
+            </div>
+        </form>
+    </div>
+</div>

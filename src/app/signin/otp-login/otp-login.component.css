@@ -1,0 +1,54 @@
+.main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.center{
+    width: 70%;
+}
+
+.heading{
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-main{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main button{
+    padding: 24px;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Full viewport height */
+    width: 100vw;
+    /* Full viewport width */
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Optional: semi-transparent background */
+    z-index: 9999;
+    /* Make sure it's on top of other elements */
+}
+
+.spinner-center{
+    width: 20%;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    background-color: white;
+}
+

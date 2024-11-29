@@ -1,0 +1,319 @@
+<div class="spinner-container" *ngIf="isLoading">
+    <mat-spinner style="width: 50px;"></mat-spinner>
+</div>
+<div class="main">
+    <div class="form-main">
+        <mat-accordion class="example-headers-align" multi>
+            <!-- personal details -->
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Personal data
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Your personal details
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <form [formGroup]="detailForm" (ngSubmit)="update()" novalidate>
+                    <div class="container-fluid mt-5">
+                        <div class="row">
+                            <div
+                                class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                                <mat-form-field class="example-full-width custom-height-field" appearance="outline">
+                                    <mat-label>First Name</mat-label>
+                                    <input type="text" matInput formControlName="firstName" placeholder="First Name">
+                                    <mat-error *ngIf="detailForm.get('firstName')?.hasError('required')">First Name
+                                        isrequired</mat-error>
+                                    <mat-error
+                                        *ngIf="detailForm.get('firstName')?.hasError('alphabetic') && !detailForm.get('firstName')?.hasError('required')">First
+                                        Name must contain only alphabets</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div
+                                class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                                <mat-form-field class="example-full-width custom-height-field" appearance="outline">
+                                    <mat-label>Last Name</mat-label>
+                                    <input type="text" matInput formControlName="lastName" placeholder="Last Name">
+                                    <mat-error *ngIf="detailForm.get('lastName')?.hasError('required')">Last Name is
+                                        required</mat-error>
+                                    <mat-error
+                                        *ngIf="detailForm.get('lastName')?.hasError('alphabetic') && !detailForm.get('lastName')?.hasError('required')">Last
+                                        Name must contain only alphabets</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div
+                                class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                                <mat-form-field class="example-full-width custom-height-field" appearance="outline">
+                                    <mat-label>Email</mat-label>
+                                    <input type="email" matInput formControlName="email" placeholder="email@ex.com">
+                                    <mat-error *ngIf="detailForm.get('email')?.hasError('required')">Email is
+                                        required</mat-error>
+                                    <mat-error
+                                        *ngIf="detailForm.get('email')?.hasError('email') && !detailForm.get('email')?.hasError('required')">Invalid
+                                        email id</mat-error>
+                                    <mat-error *ngIf="detailForm.get('email')?.hasError('emailTaken')">Email Id already
+                                        exist</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div
+                                class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                                <mat-form-field class="example-full-width custom-height-field" appearance="outline">
+                                    <mat-label>Phone Number</mat-label>
+                                    <input type="text" matInput formControlName="mobNo"
+                                        (submit)="updatePhoneNumberErrorMessage()"
+                                        (blur)="updatePhoneNumberErrorMessage()" placeholder="Phone Number">
+                                    <mat-error *ngIf="phoneNumberErrorMessage">{{phoneNumberErrorMessage}}</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div
+                                class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                                <mat-form-field class="example-full-width custom-height-field" appearance="outline">
+                                    <mat-label>Date Of Birth</mat-label>
+                                    <input matInput formControlName="dob" [matDatepicker]="picker" (dateChange)="updateAge()">
+                                    <mat-hint>MM/DD/YYYY</mat-hint>
+                                    <mat-datepicker-toggle matIconSuffix [for]="picker">
+                                        <!-- <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon> -->
+                                    </mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                    <mat-error *ngIf="detailForm.get('dob')?.hasError('required')">Date Of Birth is
+                                        required</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex flex-column align-items-center justify-content-center"
+                                style="width: 60%;">
+                                <div style="width: 60%;">
+                                    <label>Gender: </label>
+                                </div>
+                                <div style="width: 60%;">
+                                    <mat-radio-group formControlName="gender">
+                                        <mat-radio-button value="male">Male</mat-radio-button>
+                                        <mat-radio-button value="female">Female</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                                <mat-error
+                                    *ngIf="detailForm.get('gender')?.hasError('required') && detailForm.get('gender')?.touched">Gender
+                                    is
+                                    required
+                                </mat-error>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div
+                                class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                                <mat-form-field class="example-full-width custom-height-field" appearance="outline">
+                                    <mat-label>Age</mat-label>
+                                    <input type="text" matInput formControlName="age" placeholder="Age" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div
+                                class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                                <div class="file-center">
+                                    <input class="" id="input-file-id" multiple type="file" accept="image/*"/>
+                                    <label for="input-file-id" class="md-button md-raised md-primary">Choose Profile
+                                        Image</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </mat-expansion-panel>
+
+            <!--Address details-->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Address
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Address and contact details
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <form [formGroup]="detailForm" (ngSubmit)="update()" novalidate>
+                    <div class="container-fluid mt-5">
+                        <div class="row">
+                            <div
+                                class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>Address</mat-label>
+                                    <textarea matInput formControlName="address"></textarea>
+                                    <mat-error *ngIf="detailForm.get('address')?.hasError('required')">Address is
+                                        required</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div
+                                class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                                <mat-form-field class="example-full-width custom-height-field" appearance="outline">
+                                    <mat-label>Country</mat-label>
+                                    <input type="text" matInput formControlName="country" placeholder="country">
+                                    <mat-error *ngIf="detailForm.get('country')?.hasError('required')">Country is
+                                        required</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div
+                                class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                                <mat-form-field class="example-full-width custom-height-field" appearance="outline">
+                                    <mat-label>State</mat-label>
+                                    <input type="text" matInput formControlName="state" placeholder="state">
+                                    <mat-error *ngIf="detailForm.get('state')?.hasError('required')">State is
+                                        required</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div
+                                class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                                <mat-form-field class="example-full-width custom-height-field" appearance="outline">
+                                    <mat-label>City</mat-label>
+                                    <input type="text" matInput formControlName="city" placeholder="city">
+                                    <mat-error *ngIf="detailForm.get('city')?.hasError('required')">City is
+                                        required</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </mat-expansion-panel>
+
+            <!--Other details-->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Other Details
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Your Skills,hobbies, etc..
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <form [formGroup]="detailForm" novalidate>
+                    <div class="container-fluid mt-5">
+                        <div class="row">
+                            <div
+                                class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                                <mat-form-field class="example-chip-list" appearance="outline">
+                                    <mat-label>Skills</mat-label>
+                                    <mat-chip-grid #chipGrid aria-label="sill selection">
+                                        <mat-chip-row *ngFor="let skill of skills"
+                                            (removed)="remove(skill)">
+                                            {{skill}}
+                                            <button matChipRemove [attr.aria-label]="'remove ' + skill">
+                                                <mat-icon>cancel</mat-icon>
+                                            </button>
+                                        </mat-chip-row>
+                                    </mat-chip-grid>
+                                    <input placeholder="Skills" #skillInput formControlName="skill"
+                                        [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                        (matChipInputTokenEnd)="add($event)"/>
+                                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                                        <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
+                                            {{skill}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+
+                            </div>
+                            <div
+                                class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                                <mat-form-field class="example-chip-list" appearance="outline">
+                                    <mat-label>Hobbies</mat-label>
+                                    <mat-chip-grid #hobbyChipGrid aria-label="hobby selection">
+                                        <mat-chip-row *ngFor="let hobby of hobbies"
+                                            (removed)="removeHobby(hobby)">
+                                            {{hobby}}
+                                            <button matChipRemove>
+                                                <mat-icon>cancel</mat-icon>
+                                            </button>
+                                        </mat-chip-row>
+                                    </mat-chip-grid>
+                                    <input placeholder="Hobbies" #hobbyInput formControlName="hobbie"
+                                        [matChipInputFor]="hobbyChipGrid"
+                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                        (matChipInputTokenEnd)="addHobby($event)"/>
+                                    <mat-error *ngIf="detailForm.get('hobbie')?.hasError('required')">Hobbie is
+                                        required</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div
+                                class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>Favourite Subjects</mat-label>
+                                    <mat-select formControlName="subject" multiple>
+                                        <mat-option *ngFor="let subject of subjects"
+                                            [value]="subject">{{subject}}</mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="detailForm.get('subject')?.hasError('required')">Subject is
+                                        required</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </mat-expansion-panel>
+
+            <!--Emergency contact details-->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Emergency Details
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Emergency contact person details
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <form [formGroup]="detailForm" novalidate>
+                    <div class="container-fluid mt-5">
+                        <div class="row">
+                            <div
+                                class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                                <mat-form-field class="example-full-width custom-height-field" appearance="outline">
+                                    <mat-label>Contact person</mat-label>
+                                    <input type="text" matInput formControlName="contactPerson"
+                                        placeholder="Contact person">
+                                    <mat-error *ngIf="detailForm.get('contactPerson')?.hasError('required')">Contact
+                                        person is
+                                        required</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div
+                                class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                                <mat-form-field class="example-full-width custom-height-field" appearance="outline">
+                                    <mat-label>Phone number</mat-label>
+                                    <input type="text" matInput formControlName="emergencyPhoneNumber"
+                                        placeholder="Phone number">
+                                    <mat-error
+                                        *ngIf="detailForm.get('emergencyPhoneNumber')?.hasError('required')">Emergency
+                                        Phonenumber is
+                                        required</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div
+                                class="col-lg-6 col-md-6 col-sm-12 p-0 mb-3 d-flex align-items-center justify-content-center">
+                                <mat-form-field class="example-full-width custom-height-field" appearance="outline">
+                                    <mat-label>Relationship</mat-label>
+                                    <input type="text" matInput formControlName="relationship"
+                                        placeholder="Relationship">
+                                    <mat-error *ngIf="detailForm.get('relationship')?.hasError('required')">Relationship
+                                        is
+                                        required</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <div class="center">
+            <button type="submit" (click)="update()">Save</button>
+        </div>
+    </div>

@@ -1,0 +1,32 @@
+.main{
+    width: 100%;
+    /* height: 100vh; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    margin-top: 50px;
+    font-family: "Poppins", sans-serif;
+}
+
+.mat-mdc-text-field-wrapper .mdc-text-field .ng-tns-c1205077789-3 .mdc-text-field--outlined{
+    height: 50px !important;
+}
+
+.form-main{
+    width: 80%;
+    border: 1px solid rgb(206, 201, 201);
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px rgb(214, 212, 212);
+    margin-bottom: 30px;
+}
+
+.example-full-width,.example-chip-list{
+    width: 60%;
+}
+
+::ng-deep .custom-height-field .mat-mdc-text-field-wrapper.mdc-text-field {
+    height: 50px !important;
+    align-items: center;
+  }

@@ -1,0 +1,100 @@
+<div class="main">
+  <div class="flex-end">
+    <div style="margin-right: 20px;">
+      <mat-form-field>
+        <mat-label>Search</mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input>
+      </mat-form-field>
+    </div>
+    <div *ngIf="selection.hasValue()" style="margin-top: 10px;">
+      <button mat-raised-button color="primary" [matMenuTriggerFor]="menu">Export</button>
+      <mat-menu #menu="matMenu" xPosition="before">
+        <button mat-menu-item (click)="exportDataAsExcel()">
+          <span>Excel</span>
+        </button>
+        <button mat-menu-item (click)="exportDataAsCSV()">
+          <span>CSV</span>
+        </button>
+        <button mat-menu-item (click)="exportDataAsPDF()">
+          <span>PDF</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+  <div class="mat-elevation-z8 center">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="select">
+        <div style="width: 40%;">
+          <th mat-header-cell *matHeaderCellDef style="width: 10%;">
+            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="isAllSelected()"
+              [indeterminate]="isIndeterminate()">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(element) : null"
+              [checked]="selection.isSelected(element)">
+            </mat-checkbox>
+          </td>
+        </div>
+      </ng-container>
+      <!-- FirstName Column -->
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 22%;"> First Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+      </ng-container>
+
+      <!-- LastName Column -->
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 22%;"> Last Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 22%;"> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+      <!-- MobNo Column -->
+      <ng-container matColumnDef="mobNo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 22%;"> Mob No </th>
+        <td mat-cell *matCellDef="let element"> {{element.mobNo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="matt-icon" style="width: 70%;">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button (click)="editDetails(element)" mat-menu-item>
+                <mat-icon style="font-size: 18px;cursor: pointer;" title="edit">edit</mat-icon>
+                <span>Edit</span>
+              </button>
+              <button mat-menu-item (click)="viewDetails(element)">
+                <mat-icon style="font-size: 18px;cursor: pointer;" title="view">visibility</mat-icon>
+                <span>View</span>
+              </button>
+              <button mat-menu-item (click)="showDeletePopup(element)">
+                <mat-icon style="font-size: 18px;cursor: pointer;" title="delete">delete</mat-icon>
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </div>
+
+</div>

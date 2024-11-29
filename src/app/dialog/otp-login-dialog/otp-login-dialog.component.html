@@ -1,0 +1,20 @@
+<div class="main">
+    <div class="center">
+        <h1 mat-dialog-title>OTP verification</h1>
+    </div>
+    <div mat-dialog-content >
+        <div class="center">
+            <p>We have sent you a OTP to the registered email</p>
+        </div>
+        <div class="center" style="width: 100%;">
+            <form style="width: 100%;" (submit)="submitOtp()">
+                <div class="center" style="width: 100%; margin-bottom: 20px;">
+                    <input type="text" name="otp" [(ngModel)]="otp">
+                </div>
+                <div class="center" style="width: 100%;">
+                    <button mat-raised-button color="primary">Verify & Proceed</button>
+                </div>
+            </form>  
+        </div>
+    </div>
+</div>
