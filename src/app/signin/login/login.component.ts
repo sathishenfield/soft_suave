@@ -48,6 +48,7 @@ export class LoginComponent {
   }
 
   onCaptchaResolved(captchaResponse: string): void {
+    console.log("dfs");
     this.captchaResponse = captchaResponse;
     this.captchaResolved = true;
     console.log(`Captcha resolved with response: ${captchaResponse}`);
